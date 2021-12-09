@@ -27,6 +27,27 @@ while len(stock_pieces) != 14:
 # while True:
 #     if len(player_pieces_double_filter) > 0 or len(computer_pieces_double_filter) > 0:
 #         break
+#------------------------------working solution--------------------------------
+# random_pieces = random.randint(6, 7)
+# if random_pieces == 7:
+#     computer_pieces_count = random_pieces
+#     player_pieces_count = random_pieces - 1
+# if random_pieces == 6:
+#     computer_pieces_count = random_pieces
+#     player_pieces_count = random_pieces + 1
+#
+# while len(computer_pieces) != computer_pieces_count:
+#     num1 = random.randint(0, 6)
+#     num2 = random.randint(0, 6)
+#     if [num1, num2] not in computer_pieces:
+#         computer_pieces.append([num1, num2])
+#
+# while len(player_pieces) != player_pieces_count:
+#     num1 = random.randint(0, 6)
+#     num2 = random.randint(0, 6)
+#     if [num1, num2] not in player_pieces:
+#         player_pieces.append([num1, num2])
+#------------------------------------------------------------
 
 while len(computer_pieces) != 7:
     num1 = random.randint(0, 6)
@@ -34,7 +55,7 @@ while len(computer_pieces) != 7:
     if [num1, num2] not in computer_pieces:
         computer_pieces.append([num1, num2])
 
-while len(player_pieces) != 6:
+while len(player_pieces) != 7:
     num1 = random.randint(0, 6)
     num2 = random.randint(0, 6)
     if [num1, num2] not in player_pieces:
@@ -86,14 +107,48 @@ for i, j in player_pieces:
 
 if max_computer > max_player:
     domino_snake = max_computer
+    computer_pieces.remove(max_computer)
     status = "player"
 else:
     domino_snake = max_player
+    player_pieces.remove(max_player)
     status = "computer"
 
+#----------------first stage output----------------------
+# print(f"Stock pieces: {stock_pieces}")
+# print(f"Computer pieces: {computer_pieces}")
+# print(f"Player pieces: {player_pieces}")
+# print(f"Domino snake: [{domino_snake}]")
+# print(f"Status: {status}")
+#--------------------------------------------------------
+# if status == "computer":
+#     print('The Computer makes the first move (status = "computer")')
+# else:
+#     print('The player makes the first move (status = "player")')
+# print()
+# print("======================================================================")
+print(70 * "=")
+print(f"Stock size: {len(stock_pieces)}")
+print(f"Computer pieces: {len(computer_pieces)}")
+print()
+print(f"{domino_snake}")
+print()
+print("Your pieces:")
+#----------------Your pieces---------------------
+j = 1
+for i in player_pieces:
+    print(f"{j}:{i}")
+    j += 1
+#------------------------------------------------
+print()
+if status == "computer":
+    print("Status: Computer is about to make a move. Press Enter to continue...")
+else:
+    print("Status: It's your turn to make a move. Enter your command.")
 
-print(f"Stock pieces: {stock_pieces}")
-print(f"Computer pieces: {computer_pieces}")
-print(f"Player pieces: {player_pieces}")
-print(f"Domino snake: [{domino_snake}]")
-print(f"Status: {status}")
+
+
+
+
+
+#------------------------------------------------
