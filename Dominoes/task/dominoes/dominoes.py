@@ -52,13 +52,13 @@ while len(stock_pieces) != 14:
 while len(computer_pieces) != 7:
     num1 = random.randint(0, 6)
     num2 = random.randint(0, 6)
-    if [num1, num2] not in computer_pieces:
+    if [num1, num2] not in computer_pieces and [num1, num2] not in player_pieces:
         computer_pieces.append([num1, num2])
 
 while len(player_pieces) != 7:
     num1 = random.randint(0, 6)
     num2 = random.randint(0, 6)
-    if [num1, num2] not in player_pieces:
+    if [num1, num2] not in player_pieces and [num1, num2] not in computer_pieces:
         player_pieces.append([num1, num2])
 
 for i, j in computer_pieces:
@@ -134,13 +134,13 @@ def print_result():
     print(f"Stock size: {len(stock_pieces)}")
     print(f"Computer pieces: {len(computer_pieces)}")
     print()
-    print("testing", queue)
+    # print("testing", queue)
     # print(f"{domino_snake}")
-    if len(queue) < 7:
+    if len(queue) < 6:
         for n in list(queue):
             print(n, end="")
     else:
-        print(f"{queue[0]} {queue[1]} {queue[2]} ... {queue[-3]} {queue[-2]} {queue[-1]}")
+        print(f"{queue[0]} {queue[1]} {queue[2]}...{queue[-3]} {queue[-2]} {queue[-1]}")
     print()
     print()
     print("Your pieces:")
@@ -158,84 +158,161 @@ def print_result():
 #     print("Status: Computer is about to make a move. Press Enter to continue...")
 # else:
 #     print("Status: It's your turn to make a move. Enter your command.")
+#-------------------------------------------------------------------------------------
+# def computer_start():
+#     global num_computer, num_player
+#     while True:
+#         if len(computer_pieces) == 0:
+#             print_result()
+#             print("Status: The game is over. The computer won!")
+#             break
+#         if len(player_pieces) == 0:
+#             print_result()
+#             print("Status: The game is over. You won!")
+#             break
+#         print_result()
+#         print("Status: Computer is about to make a move. Press Enter to continue...")
+#         print()
+#         # print_result()
+#         num_computer = random.randint(-len(computer_pieces), len(computer_pieces))
+#         if num_computer == 0 and len(stock_pieces) != 0:
+#             computer_pieces.append(stock_pieces.pop())
+#         elif num_computer < 0:
+#             queue.appendleft(computer_pieces[abs(num_computer) - 1])
+#             computer_pieces.pop(abs(num_computer) - 1)
+#         else:
+#             queue.append(computer_pieces[abs(num_computer) - 1])
+#             computer_pieces.pop(abs(num_computer) - 1)
+#         print_result()
+#         print("Status: It's your turn to make a move. Enter your command.")
+#         while True:
+#             num_player = input()
+#             if num_player.isdigit():
+#                 num_player = int(num_player)
+#                 if num_player <= len(player_pieces):
+#                     break
+#                 else:
+#                     print("Status: It's your turn to make a move. Enter your command.")
+#             else:
+#                 print("Invalid input. Please try again.")
+#         print_result()
+#         if num_player == 0 and len(stock_pieces) != 0:
+#             player_pieces.append(stock_pieces.pop())
+#         elif num_player < 0:
+#             queue.appendleft(player_pieces[abs(num_player - 1)])
+#             player_pieces.pop(abs(num_player) - 1)
+#         else:
+#             queue.append(player_pieces[abs(num_player - 1)])
+#             player_pieces.pop(abs(num_player) - 1)
+#
+#
+# def player_start():
+#     global num_player, num_computer
+#     while True:
+#         if len(computer_pieces) == 0:
+#             print_result()
+#             print("Status: The game is over. The computer won!")
+#             break
+#         if len(player_pieces) == 0:
+#             print_result()
+#             print("Status: The game is over. You won!")
+#             break
+#         print_result()
+#         print("Status: It's your turn to make a move. Enter your command.")
+#         while True:
+#             num_player = input()
+#             if num_player.isdigit():
+#                 num_player = int(num_player)
+#                 if num_player <= len(player_pieces):
+#                     break
+#                 else:
+#                     print("Status: It's your turn to make a move. Enter your command.")
+#             else:
+#                 print("Invalid input. Please try again.")
+#         if num_player == 0 and len(stock_pieces) != 0:
+#             player_pieces.append(stock_pieces.pop())
+#         elif num_player < 0:
+#             queue.appendleft(player_pieces[abs(num_player - 1)])
+#             player_pieces.pop(abs(num_player) - 1)
+#         else:
+#             queue.append(player_pieces[abs(num_player - 1)])
+#             player_pieces.pop(abs(num_player) - 1)
+#         print_result()
+#         print("Status: Computer is about to make a move. Press Enter to continue...")
+#         print()
+#         # print_result()
+#         num_computer = random.randint(-len(computer_pieces), len(computer_pieces))
+#         if num_computer == 0 and len(stock_pieces) != 0:
+#             computer_pieces.append(stock_pieces.pop())
+#         if num_computer < 0:
+#             queue.appendleft(computer_pieces[abs(num_computer) - 1])
+#             computer_pieces.pop(abs(num_computer) - 1)
+#         else:
+#             queue.append(computer_pieces[abs(num_computer) - 1])
+#             computer_pieces.pop(abs(num_computer) - 1)
+#
+#
+# if status == "computer":
+#     # player_start()
+#     computer_start()
+# else:
+#     # computer_start()
+#     player_start()
 
-
-if status == "computer":
-    while True:
-        if len(computer_pieces) == 0:
-            print_result()
-            break
-            print("Status: The game is over. The computer won!")
-        if len(player_pieces) == 0:
-            print_result()
-            print("Status: The game is over. You won!")
-            break
+# ------------------------------------------------
+print_result()
+while True:
+    if len(computer_pieces) == 0:
         print_result()
+        print("Status: The game is over. The computer won!")
+        break
+    elif len(player_pieces) == 0:
+        print_result()
+        print("Status: The game is over. You won!")
+        break
+    if status == "computer":
+        # print_result()
         print("Status: Computer is about to make a move. Press Enter to continue...")
+        print()
+        # print_result()
         num_computer = random.randint(-len(computer_pieces), len(computer_pieces))
         if num_computer == 0 and len(stock_pieces) != 0:
             computer_pieces.append(stock_pieces.pop())
         elif num_computer < 0:
-            queue.appendleft(computer_pieces[num_computer])
+            queue.appendleft(computer_pieces[abs(num_computer) - 1])
             computer_pieces.pop(abs(num_computer) - 1)
         else:
-            queue.append(computer_pieces[num_computer])
+            queue.append(computer_pieces[abs(num_computer) - 1])
             computer_pieces.pop(abs(num_computer) - 1)
+        status = "player"
         print_result()
+    if status == "player":
+        # print_result()
         print("Status: It's your turn to make a move. Enter your command.")
         while True:
-            num_player = input()
-            if num_player.isdigit():
-                num_player = int(num_player)
-                break
-            else:
+            try:
+                num_player = int(input())
+                if abs(num_player) <= len(player_pieces):
+                    break
+                else:
+                    print("Status: It's your turn to make a move. Enter your command.")
+            except ValueError:
                 print("Invalid input. Please try again.")
+                # if abs(num_player) <= len(player_pieces):
+                #     break
+                # else:
+                    # print("Status: It's your turn to make a move. Enter your command.")
+            # else:
+            #     print("Invalid input. Please try again.")
         if num_player == 0 and len(stock_pieces) != 0:
             player_pieces.append(stock_pieces.pop())
         elif num_player < 0:
-            queue.appendleft(player_pieces[abs(num_player)])
+            queue.appendleft(player_pieces[abs(num_player) - 1])
             player_pieces.pop(abs(num_player) - 1)
         else:
-            queue.append(player_pieces[abs(num_player)])
+            queue.append(player_pieces[abs(num_player) - 1])
             player_pieces.pop(abs(num_player) - 1)
-
-else:
-    while True:
-        if len(computer_pieces) == 0:
-            print_result()
-            break
-            print("Status: The game is over. The computer won!")
-        if len(player_pieces) == 0:
-            print_result()
-            print("Status: The game is over. You won!")
-            break
+        status = "computer"
         print_result()
-        print("Status: It's your turn to make a move. Enter your command.")
-        while True:
-            num_player = input()
-            if num_player.isdigit():
-                num_player = int(num_player)
-                break
-            else:
-                print("Invalid input. Please try again.")
-        if num_player == 0 and len(stock_pieces) != 0:
-            player_pieces.append(stock_pieces.pop())
-        elif num_player < 0:
-            queue.appendleft(player_pieces[abs(num_player)])
-            player_pieces.pop(abs(num_player) - 1)
-        else:
-            queue.append(player_pieces[abs(num_player)])
-            player_pieces.pop(abs(num_player) - 1)
-        print_result()
-        print("Status: Computer is about to make a move. Press Enter to continue...")
-        num_computer = random.randint(-len(computer_pieces), len(computer_pieces))
-        if num_computer == 0 and len(stock_pieces) != 0:
-            computer_pieces.append(stock_pieces.pop())
-        if num_computer < 0:
-            queue.appendleft(computer_pieces[num_computer])
-            computer_pieces.pop(abs(num_computer) - 1)
-        else:
-            queue.append(computer_pieces[num_computer])
-            computer_pieces.pop(abs(num_computer) - 1)
 
-# ------------------------------------------------
+
