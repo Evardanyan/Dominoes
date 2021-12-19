@@ -347,47 +347,8 @@ files:
         TestStage3('dominoes.dominoes').run_tests()
   learner_created: false
 feedback_link: https://hyperskill.org/projects/146/stages/788/implement#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Wrong answer in test #1
-
-    The player pieces are not unique
-
-    Please find below the output of your program during this failed test.
-
-    ---
-
-    ======================================================================
-    Stock size: 14
-    Computer pieces: 7
-
-    [6, 6]
-
-    Your pieces:
-    1:[4, 2]
-    2:[1, 5]
-    3:[4, 6]
-    4:[3, 0]
-    5:[6, 5]
-    6:[0, 3]
-
-    Status: Computer is about to make a move. Press Enter to continue...
-
-    ======================================================================
-    Stock size: 14
-    Computer pieces: 6
-
-    [6, 6][4, 5]
-
-    Your pieces:
-    1:[4, 2]
-    2:[1, 5]
-    3:[4, 6]
-    4:[3, 0]
-    5:[6, 5]
-    6:[0, 3]
-
-    Status: It's your turn to make a move. Enter your command.
-  time: Fri, 17 Dec 2021 22:47:50 UTC
+  message: Congratulations!
+  time: Sun, 19 Dec 2021 23:11:43 UTC
 record: -1

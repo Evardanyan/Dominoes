@@ -147,7 +147,7 @@ def print_result():
     # ----------------Your pieces---------------------
     j = 1
     for i in player_pieces:
-        print(f"{j}:{i}")
+        print(f"{j}: {i}")
         j += 1
     # ------------------------------------------------
     print()
@@ -273,19 +273,21 @@ while True:
     if status == "computer":
         # print_result()
         print("Status: Computer is about to make a move. Press Enter to continue...")
-        print()
-        # print_result()
-        num_computer = random.randint(-len(computer_pieces), len(computer_pieces))
-        if num_computer == 0 and len(stock_pieces) != 0:
-            computer_pieces.append(stock_pieces.pop())
-        elif num_computer < 0:
-            queue.appendleft(computer_pieces[abs(num_computer) - 1])
-            computer_pieces.pop(abs(num_computer) - 1)
-        else:
-            queue.append(computer_pieces[abs(num_computer) - 1])
-            computer_pieces.pop(abs(num_computer) - 1)
-        status = "player"
-        print_result()
+        enter_button = input()
+        if enter_button == "":
+            print()
+            # print_result()
+            num_computer = random.randint(-len(computer_pieces), len(computer_pieces))
+            if num_computer == 0 and len(stock_pieces) != 0:
+                computer_pieces.append(stock_pieces.pop())
+            elif num_computer < 0:
+                queue.appendleft(computer_pieces[abs(num_computer) - 1])
+                computer_pieces.pop(abs(num_computer) - 1)
+            else:
+                queue.append(computer_pieces[abs(num_computer) - 1])
+                computer_pieces.pop(abs(num_computer) - 1)
+            status = "player"
+            print_result()
     if status == "player":
         # print_result()
         print("Status: It's your turn to make a move. Enter your command.")
