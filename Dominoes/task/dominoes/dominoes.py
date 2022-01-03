@@ -61,21 +61,21 @@ while len(player_pieces) != 7:
     if [num1, num2] not in player_pieces and [num1, num2] not in computer_pieces:
         player_pieces.append([num1, num2])
 
-for i, j in computer_pieces:
-    temp_computer_sum = i + j
+for i_player, j in computer_pieces:
+    temp_computer_sum = i_player + j
     # print(temp_computer_sum)
     if max_computer_temp < temp_computer_sum:
         max_computer_temp = temp_computer_sum
-        max_computer = [i, j]
+        max_computer = [i_player, j]
 
 # print(computer_pieces_double_filter)
 
-for i, j in player_pieces:
-    temp_player_sum = i + j
+for i_player, j in player_pieces:
+    temp_player_sum = i_player + j
     # print(temp_computer_sum)
     if max_player_temp < temp_player_sum:
         max_player_temp = temp_player_sum
-        max_player = [i, j]
+        max_player = [i_player, j]
 
     # print(stock_pieces)
     # print(computer_pieces)
@@ -262,6 +262,14 @@ def print_result():
 # ------------------------------------------------
 print_result()
 while True:
+#--------------new module for stage 4 snake start and end number-----------------------------
+    # snake_start = queue[0][0]
+    # snake_end = queue[-1][1]
+    # print(f"snake start is {snake_start}")
+    # print(f"snake end is {snake_end}")
+    print() # only for testing stage 4
+    print(queue,"\n") # only for testing stage 4
+#------------------------------------------------------------------
     if len(computer_pieces) == 0:
         print_result()
         print("Status: The game is over. The computer won!")
@@ -286,6 +294,12 @@ while True:
             else:
                 queue.append(computer_pieces[abs(num_computer) - 1])
                 computer_pieces.pop(abs(num_computer) - 1)
+            # --------------new module for stage 4 snake start and end number-----------------------------
+            snake_start = queue[0][0]
+            snake_end = queue[-1][1]
+            print(f"snake start is {snake_start}")
+            print(f"snake end is {snake_end}")
+            #---------------------------------------------------------------------------------------------
             status = "player"
             print_result()
     if status == "player":
@@ -300,20 +314,51 @@ while True:
                     print("Status: It's your turn to make a move. Enter your command.")
             except ValueError:
                 print("Invalid input. Please try again.")
-                # if abs(num_player) <= len(player_pieces):
-                #     break
-                # else:
-                    # print("Status: It's your turn to make a move. Enter your command.")
-            # else:
-            #     print("Invalid input. Please try again.")
-        if num_player == 0 and len(stock_pieces) != 0:
-            player_pieces.append(stock_pieces.pop())
-        elif num_player < 0:
-            queue.appendleft(player_pieces[abs(num_player) - 1])
-            player_pieces.pop(abs(num_player) - 1)
-        else:
-            queue.append(player_pieces[abs(num_player) - 1])
-            player_pieces.pop(abs(num_player) - 1)
+
+
+#-----------------player module with any pieces on stage 3 deprected for stage 4--------------------
+
+        # if num_player == 0 and len(stock_pieces) != 0:
+        #     player_pieces.append(stock_pieces.pop())
+        # elif num_player < 0:
+        #     queue.appendleft(player_pieces[abs(num_player) - 1])
+        #     player_pieces.pop(abs(num_player) - 1)
+        # else:
+        #     queue.append(player_pieces[abs(num_player) - 1])
+        #     player_pieces.pop(abs(num_player) - 1)
+
+#-------------------------------------------------------------------------------
+
+        # --------------new module for stage 4 snake start and end number-----------------------------
+        snake_start = queue[0][0]
+        snake_end = queue[-1][1]
+        print(f"snake start is {snake_start}")
+        print(f"snake end is {snake_end}")
+        # ---------------------------------------------------------------------------------------------
+        #------------------------ new moduel for stage 4  put right piece of player and rotate it------
+        print(f"player pieces is {player_pieces}")
+        i_player = player_pieces[num_player - 1]
+        player_delete_num = num_player - 1
+        # for i in player_pieces:
+        if snake_start == i_player[0]:
+            player_piece_rotate = [i_player[1], i_player[0]]
+            print(f"start and roatate {player_piece_rotate}")
+            queue.appendleft(player_piece_rotate)
+            player_pieces.pop(player_delete_num)
+        elif snake_start == i_player[1]:
+            queue.appendleft(i_player)
+            print(f"start without rotate {i_player}")
+            player_pieces.pop(player_delete_num)
+        elif snake_end == i_player[0]:
+            queue.append(i_player)
+            print(f"end without rotate {i_player}")
+            player_pieces.pop(player_delete_num)
+        elif snake_end == i_player[1]:
+            player_piece_rotate = [i_player[1], i_player[0]]
+            print(f"end and roatet is {player_piece_rotate}")
+            queue.append(player_piece_rotate)
+            player_pieces.pop(player_delete_num)
+        #----------------------------------------------------------------------------------------------
         status = "computer"
         print_result()
 
