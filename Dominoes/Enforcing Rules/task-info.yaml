@@ -1,10 +1,5 @@
 type: edu
 files:
-- name: dominoes/dominoes.py
-  visible: true
-  text: |
-    # Write your code here
-  learner_created: false
 - name: tests.py
   visible: false
   text: |
@@ -368,6 +363,11 @@ files:
 
     if __name__ == '__main__':
         TestStage4('dominoes.dominoes').run_tests()
+  learner_created: false
+- name: dominoes/dominoes.py
+  visible: true
+  text: |
+    # Write your code here
   learner_created: false
 feedback_link: https://hyperskill.org/projects/146/stages/789/implement#comment
 status: Unchecked

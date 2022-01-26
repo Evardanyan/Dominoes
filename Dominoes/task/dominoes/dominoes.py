@@ -289,6 +289,7 @@ while True:
 #---------------------------this module for stage 4 computers------------------------------------------------
             snake_start = queue[0][0]
             snake_end = queue[-1][1]
+            computer_piece_rotate= []
             for i in computer_pieces:
                 # print(f"i[0] or i[1] is {i[0], i[1]}")
                 if i[0]  == snake_start or i[0] == snake_end or i[1] == snake_start or i[1] == snake_end:
@@ -361,8 +362,8 @@ while True:
             #     computer_pieces.pop(abs(num_computer) - 1)
 #---------------------------------------------------------------------------------------------------------
             # --------------new module for stage 4 snake start and end number-----------------------------
-            snake_start = queue[0][0]
-            snake_end = queue[-1][1]
+            # snake_start = queue[0][0]
+            # snake_end = queue[-1][1]
             print(f"snake start is {snake_start}")
             print(f"snake end is {snake_end}")
             #---------------------------------------------------------------------------------------------
