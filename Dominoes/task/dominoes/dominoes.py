@@ -284,16 +284,82 @@ while True:
         enter_button = input()
         if enter_button == "":
             print()
+            print(f"computer pieces is {computer_pieces}")
             # print_result()
-            num_computer = random.randint(-len(computer_pieces), len(computer_pieces))
-            if num_computer == 0 and len(stock_pieces) != 0:
-                computer_pieces.append(stock_pieces.pop())
-            elif num_computer < 0:
-                queue.appendleft(computer_pieces[abs(num_computer) - 1])
-                computer_pieces.pop(abs(num_computer) - 1)
-            else:
-                queue.append(computer_pieces[abs(num_computer) - 1])
-                computer_pieces.pop(abs(num_computer) - 1)
+#---------------------------this module for stage 4 computers------------------------------------------------
+            snake_start = queue[0][0]
+            snake_end = queue[-1][1]
+            for i in computer_pieces:
+                # print(f"i[0] or i[1] is {i[0], i[1]}")
+                if i[0]  == snake_start or i[0] == snake_end or i[1] == snake_start or i[1] == snake_end:
+                    print(f"i[0] or i[1] is {i[0],i[1]}")
+                    num_computer = i
+                    i_computer = num_computer
+                    print(f"i_computer is {i_computer}")
+                    computer_delete_num = computer_pieces.index(num_computer)
+                    # for i in player_pieces:
+                    if snake_start == i_computer[0]:
+                        computer_piece_rotate = [i_computer[1], i_computer[0]]
+                        print(f"start and rotate {computer_piece_rotate}")
+                        queue.appendleft(computer_piece_rotate)
+                        computer_pieces.pop(computer_delete_num)
+                        break
+                    elif snake_start == i_computer[1]:
+                        queue.appendleft(i_computer)
+                        print(f"start without rotate {i_computer}")
+                        computer_pieces.pop(computer_delete_num)
+                        break
+                    elif snake_end == i_computer[0]:
+                        queue.append(i_computer)
+                        print(f"end without rotate {i_computer}")
+                        computer_pieces.pop(computer_delete_num)
+                        break
+                    elif snake_end == i_computer[1]:
+                        player_piece_rotate = [i_computer[1], i_computer[0]]
+                        print(f"end and roatet is {computer_piece_rotate}")
+                        queue.append(computer_piece_rotate)
+                        computer_pieces.pop(computer_delete_num)
+                        break
+                    else:
+                        computer_pieces.append(stock_pieces.pop())
+                        break
+            # i_computer = num_computer
+            # computer_delete_num = computer_pieces.index(num_computer)
+            # # for i in player_pieces:
+            # if snake_start == i_computer[0]:
+            #     computer_piece_rotate = [i_computer[1], i_computer[0]]
+            #     print(f"start and roatate {computer_piece_rotate}")
+            #     queue.appendleft(computer_piece_rotate)
+            #     computer_pieces.pop(computer_delete_num)
+            # elif snake_start == i_computer[1]:
+            #     queue.appendleft(i_computer)
+            #     print(f"start without rotate {i_computer}")
+            #     computer_pieces.pop(computer_delete_num)
+            # elif snake_end == i_computer[0]:
+            #     queue.append(i_computer)
+            #     print(f"end without rotate {i_computer}")
+            #     computer_pieces.pop(computer_delete_num)
+            # elif snake_end == i_computer[1]:
+            #     player_piece_rotate = [i_computer[1], i_computer[0]]
+            #     print(f"end and roatet is {computer_piece_rotate}")
+            #     queue.append(computer_piece_rotate)
+            #     computer_pieces.pop(computer_delete_num)
+
+
+
+
+
+#--------------------------this module for stage 3 ----------------------------------------------------------
+            # num_computer = random.randint(-len(computer_pieces), len(computer_pieces))
+            # if num_computer == 0 and len(stock_pieces) != 0:
+            #     computer_pieces.append(stock_pieces.pop())
+            # elif num_computer < 0:
+            #     queue.appendleft(computer_pieces[abs(num_computer) - 1])
+            #     computer_pieces.pop(abs(num_computer) - 1)
+            # else:
+            #     queue.append(computer_pieces[abs(num_computer) - 1])
+            #     computer_pieces.pop(abs(num_computer) - 1)
+#---------------------------------------------------------------------------------------------------------
             # --------------new module for stage 4 snake start and end number-----------------------------
             snake_start = queue[0][0]
             snake_end = queue[-1][1]
