@@ -286,7 +286,7 @@ while True:
             print()
             print(f"computer pieces is {computer_pieces}")
             # print_result()
-#---------------------------this module for stage 4 computers need fix else parte because its not entering that part------------------------------------------------
+#---------------------------this module for stage 4 computers------------------------------------------------
             snake_start = queue[0][0]
             snake_end = queue[-1][1]
             computer_piece_rotate= []
