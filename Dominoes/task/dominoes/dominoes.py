@@ -319,13 +319,17 @@ while True:
                         computer_pieces.pop(computer_delete_num)
                         break
                     elif snake_end == i_computer[1]:
-                        player_piece_rotate = [i_computer[1], i_computer[0]]
-                        print(f"end and roatet is {computer_piece_rotate}")
+                        computer_piece_rotate = [i_computer[1], i_computer[0]]
+                        print(f"end and rotate is {computer_piece_rotate}")
                         queue.append(computer_piece_rotate)
                         computer_pieces.pop(computer_delete_num)
                         break
-            if flag == False:
+            if flag == False and len(stock_pieces) != 0:
                 computer_pieces.append(stock_pieces.pop())
+            elif flag == False and len(stock_pieces) == 0:
+                print("Draw")
+                break
+
             # i_computer = num_computer
             # computer_delete_num = computer_pieces.index(num_computer)
             # # for i in player_pieces:
@@ -409,10 +413,14 @@ while True:
         # i_player = player_pieces[num_player - 1]
         # player_delete_num = num_player - 1
         # for i in player_pieces:
-        if num_player == 0:
+        if num_player == 0 and len(stock_pieces) != 0:
             player_pieces.append(stock_pieces.pop())
             status = "computer"
             print_result()
+        elif num_player == 0 and len(stock_pieces) != 0:
+            print("Draw")
+            break
+
         else:
             i_player = player_pieces[num_player - 1]
             player_delete_num = num_player - 1
