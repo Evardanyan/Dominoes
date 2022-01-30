@@ -286,13 +286,16 @@ while True:
             print()
             print(f"computer pieces is {computer_pieces}")
             # print_result()
-#---------------------------this module for stage 4 computers------------------------------------------------
+#---------------------------this module for stage 4 computers need fix else parte because its not entering that part------------------------------------------------
             snake_start = queue[0][0]
             snake_end = queue[-1][1]
             computer_piece_rotate= []
+            flag = False
+
             for i in computer_pieces:
                 # print(f"i[0] or i[1] is {i[0], i[1]}")
                 if i[0]  == snake_start or i[0] == snake_end or i[1] == snake_start or i[1] == snake_end:
+                    flag = True
                     print(f"i[0] or i[1] is {i[0],i[1]}")
                     num_computer = i
                     i_computer = num_computer
@@ -321,9 +324,8 @@ while True:
                         queue.append(computer_piece_rotate)
                         computer_pieces.pop(computer_delete_num)
                         break
-                    else:
-                        computer_pieces.append(stock_pieces.pop())
-                        break
+            if flag == False:
+                computer_pieces.append(stock_pieces.pop())
             # i_computer = num_computer
             # computer_delete_num = computer_pieces.index(num_computer)
             # # for i in player_pieces:
@@ -404,27 +406,34 @@ while True:
         # ---------------------------------------------------------------------------------------------
         #------------------------ new moduel for stage 4  put right piece of player and rotate it------
         print(f"player pieces is {player_pieces}")
-        i_player = player_pieces[num_player - 1]
-        player_delete_num = num_player - 1
+        # i_player = player_pieces[num_player - 1]
+        # player_delete_num = num_player - 1
         # for i in player_pieces:
-        if snake_start == i_player[0]:
-            player_piece_rotate = [i_player[1], i_player[0]]
-            print(f"start and roatate {player_piece_rotate}")
-            queue.appendleft(player_piece_rotate)
-            player_pieces.pop(player_delete_num)
-        elif snake_start == i_player[1]:
-            queue.appendleft(i_player)
-            print(f"start without rotate {i_player}")
-            player_pieces.pop(player_delete_num)
-        elif snake_end == i_player[0]:
-            queue.append(i_player)
-            print(f"end without rotate {i_player}")
-            player_pieces.pop(player_delete_num)
-        elif snake_end == i_player[1]:
-            player_piece_rotate = [i_player[1], i_player[0]]
-            print(f"end and roatet is {player_piece_rotate}")
-            queue.append(player_piece_rotate)
-            player_pieces.pop(player_delete_num)
+        if num_player == 0:
+            player_pieces.append(stock_pieces.pop())
+            status = "computer"
+            print_result()
+        else:
+            i_player = player_pieces[num_player - 1]
+            player_delete_num = num_player - 1
+            if snake_start == i_player[0]:
+                player_piece_rotate = [i_player[1], i_player[0]]
+                print(f"start and roatate {player_piece_rotate}")
+                queue.appendleft(player_piece_rotate)
+                player_pieces.pop(player_delete_num)
+            elif snake_start == i_player[1]:
+                queue.appendleft(i_player)
+                print(f"start without rotate {i_player}")
+                player_pieces.pop(player_delete_num)
+            elif snake_end == i_player[0]:
+                queue.append(i_player)
+                print(f"end without rotate {i_player}")
+                player_pieces.pop(player_delete_num)
+            elif snake_end == i_player[1]:
+                player_piece_rotate = [i_player[1], i_player[0]]
+                print(f"end and roatet is {player_piece_rotate}")
+                queue.append(player_piece_rotate)
+                player_pieces.pop(player_delete_num)
         #----------------------------------------------------------------------------------------------
         status = "computer"
         print_result()
