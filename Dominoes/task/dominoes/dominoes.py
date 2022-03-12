@@ -277,6 +277,8 @@ while True:
     # print() # only for testing stage 4
     # print(queue,"\n") # only for testing stage 4
 #------------------------------------------------------------------
+
+
     if len(computer_pieces) == 0:
         print_result()
         print("Status: The game is over. The computer won!")
@@ -301,19 +303,90 @@ while True:
             snake_start = queue[0][0]
             snake_end = queue[-1][1]
             computer_piece_rotate= []
+#--------------------------this module for stage 5 AI for computer-------------------------------------------
+            count = 0
+
+            computer_pieces_convert_list = [item for sublist in computer_pieces for item in sublist]
+
+            merged_computer_pieces_snake = computer_pieces_convert_list + domino_snake
+
+            computer_pieces_with_domino_snake = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
+
+            for i in merged_computer_pieces_snake:
+                if i == 0:
+                    count_zero = computer_pieces_with_domino_snake[0] + 1
+                    computer_pieces_with_domino_snake[0] = count_zero
+                elif i == 1:
+                    count_one = computer_pieces_with_domino_snake[1] + 1
+                    computer_pieces_with_domino_snake[1] = count_one
+                elif i == 2:
+                    count_two = computer_pieces_with_domino_snake[2] + 1
+                    computer_pieces_with_domino_snake[2] = count_two
+                elif i == 3:
+                    count_three = computer_pieces_with_domino_snake[3] + 1
+                    computer_pieces_with_domino_snake[3] = count_three
+                elif i == 4:
+                    count_four = computer_pieces_with_domino_snake[4] + 1
+                    computer_pieces_with_domino_snake[4] = count_four
+                elif i == 5:
+                    count_five = computer_pieces_with_domino_snake[5] + 1
+                    computer_pieces_with_domino_snake[5] = count_five
+                elif i == 6:
+                    count_six = computer_pieces_with_domino_snake[6] + 1
+                    computer_pieces_with_domino_snake[6] = count_six
+
+
+            # print(">>>>>> merged list with computer pieces is ", merged_computer_pieces_snake)
+
+            # for k,v in computer_pieces_with_domino_snake.items():
+            #     print(f"{k}: {v}")
+
+
+            computer_pieces_count_sum = []
+
+            for i in computer_pieces:
+               computer_pieces_count_sum.append(computer_pieces_with_domino_snake[i[0]] + computer_pieces_with_domino_snake[i[1]])
+
+            # print("computer_pieces is ", computer_pieces)
+            #
+            # print("computer pieces count sum is " , computer_pieces_count_sum)
+
             draw_flag_player = True
             for i in player_pieces:
                 if i[0] == snake_start or i[0] == snake_end or i[1] == snake_start or i[1] == snake_end:
                     draw_flag_player = False
                     break
             flag = False
+#--------------------------------- find solution for using max element then continue ------------------
+            # max = 0
 
-            for i in computer_pieces:
-                # print(f"i[0] or i[1] is {i[0], i[1]}")
-                if i[0]  == snake_start or i[0] == snake_end or i[1] == snake_start or i[1] == snake_end:
+            computer_pieces_count_sum_temp = computer_pieces_count_sum
+
+            # print("sum temp is", computer_pieces_count_sum_temp)
+
+            while_flag = True
+
+            while while_flag:
+
+                # for j in computer_pieces_count_sum_temp:
+                #     if j > max:
+                #         max = j
+                # if len(computer_pieces_count_sum_temp) != 0:
+                max_element = max(computer_pieces_count_sum_temp)
+
+                index_max_element = computer_pieces[computer_pieces_count_sum_temp.index(max_element)]
+
+                # print("max is ", max_element)
+                #
+                # print("index is " , computer_pieces_count_sum_temp.index(max_element))
+
+
+
+                if index_max_element[0] == snake_start or index_max_element[0] == snake_end or index_max_element[1] == snake_start or index_max_element[1] == snake_end:
                     flag = True
-                    # print(f"i[0] or i[1] is {i[0],i[1]}")
-                    num_computer = i
+
+                    num_computer = index_max_element
+
                     i_computer = num_computer
                     # print(f"i_computer is {i_computer}")
                     computer_delete_num = computer_pieces.index(num_computer)
@@ -340,13 +413,80 @@ while True:
                         queue.append(computer_piece_rotate)
                         computer_pieces.pop(computer_delete_num)
                         break
+                if len(computer_pieces_count_sum_temp) == 0 and len(stock_pieces) != 0:
+                    computer_pieces.append(stock_pieces.pop())
+                    # computer_pieces_count_sum_temp.remove(max_element)
+                    while_flag = False
+                    print("take from stock piece and out from  loop ")
+                    break
+                elif len(computer_pieces_count_sum_temp) != 0 and max_element != 0:
+                    computer_pieces_count_sum_temp[computer_pieces_count_sum_temp.index(max_element)] = 0
+                    # print(">>> len sum_temp_list after removed element",len(computer_pieces_count_sum_temp))
+                    # print("removed max from sum list ")
+                    # print(len(computer_pieces_count_sum_temp))
 
-            if flag == False and len(stock_pieces) != 0: # computer take dominos from stock
-                computer_pieces.append(stock_pieces.pop())
-            elif flag == False and len(stock_pieces) == 0 and len(player_pieces) != 0 and len(computer_pieces) != 0 and draw_flag_player:
-                print("Status: The game is over. It's a draw!")
-                break
+                elif max_element == 0 and len(stock_pieces) != 0:
+                        computer_pieces.append(stock_pieces.pop())
+                        # print("<<<<< max element is == 0 and stock pieces isnt 0", len(computer_pieces_count_sum_temp))
+                        # print("removed max from sum list ")
+                        # print(len(computer_pieces_count_sum_temp))
+                        break
+                # elif len(stock_pieces) != 0:
+                #     computer_pieces.append(stock_pieces.pop())
+                #     break
+                elif len(stock_pieces) == 0 and len(player_pieces) != 0 and len(computer_pieces) != 0 and draw_flag_player:
+                    print("Status: The game is over. It's a draw!")
+                    break
 
+
+
+
+
+
+
+
+#-------------------------------------------------------------------------------------------------------
+
+#---------------------------Stage 4 solution for computer parts -----------------------------------------
+            # for i in computer_pieces:
+            #     # print(f"i[0] or i[1] is {i[0], i[1]}")
+            #     if i[0] == snake_start or i[0] == snake_end or i[1] == snake_start or i[1] == snake_end:
+            #         flag = True
+            #         # print(f"i[0] or i[1] is {i[0],i[1]}")
+            #         num_computer = i
+            #         i_computer = num_computer
+            #         # print(f"i_computer is {i_computer}")
+            #         computer_delete_num = computer_pieces.index(num_computer)
+            #         # for i in player_pieces:
+            #         if snake_start == i_computer[0]:
+            #             computer_piece_rotate = [i_computer[1], i_computer[0]]
+            #             # print(f"start and rotate {computer_piece_rotate}")
+            #             queue.appendleft(computer_piece_rotate)
+            #             computer_pieces.pop(computer_delete_num)
+            #             break
+            #         elif snake_start == i_computer[1]:
+            #             queue.appendleft(i_computer)
+            #             # print(f"start without rotate {i_computer}")
+            #             computer_pieces.pop(computer_delete_num)
+            #             break
+            #         elif snake_end == i_computer[0]:
+            #             queue.append(i_computer)
+            #             # print(f"end without rotate {i_computer}")
+            #             computer_pieces.pop(computer_delete_num)
+            #             break
+            #         elif snake_end == i_computer[1]:
+            #             computer_piece_rotate = [i_computer[1], i_computer[0]]
+            #             # print(f"end and rotate is {computer_piece_rotate}")
+            #             queue.append(computer_piece_rotate)
+            #             computer_pieces.pop(computer_delete_num)
+            #             break
+            #
+            # if flag == False and len(stock_pieces) != 0: # computer take dominos from stock
+            #     computer_pieces.append(stock_pieces.pop())
+            # elif flag == False and len(stock_pieces) == 0 and len(player_pieces) != 0 and len(computer_pieces) != 0 and draw_flag_player:
+            #     print("Status: The game is over. It's a draw!")
+            #     break
+#-------------------------------------------stage  4 solution end part for computer ---------------------------------------------------------
             # i_computer = num_computer
             # computer_delete_num = computer_pieces.index(num_computer)
             # # for i in player_pieces:
